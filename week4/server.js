@@ -195,7 +195,7 @@ const requestListener = async (req, res) => {
       );
       res.end();
     } catch (error) {
-      res.writeHead(200, headers);
+      res.writeHead(500, headers);
       res.write(
         JSON.stringify({
           status: "error",
