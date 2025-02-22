@@ -37,10 +37,12 @@ router.get("/", async (req, res, next) => {
       data: skillData,
     });
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message || "伺服器錯誤",
-    });
+    logger.error(error);
+    next(error);
+    // res.status(500).json({
+    //   status: "error",
+    //   message: error.message || "伺服器錯誤",
+    // });
   }
 });
 
@@ -76,7 +78,7 @@ router.post("/", async (req, res, next) => {
       name,
     });
 
-    //異步
+    //異步 resul才是真正存進資料庫的資料
     const result = await skillRepo.save(newSkill);
 
     //防呆3：確保 `result` 不是 `null` 或 `undefined`
@@ -91,13 +93,15 @@ router.post("/", async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
-      data: newSkill,
+      data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message || "伺服器錯誤",
-    });
+    logger.error(error);
+    next(error);
+    // res.status(500).json({
+    //   status: "error",
+    //   message: error.message || "伺服器錯誤",
+    // });
   }
 });
 
@@ -127,10 +131,12 @@ router.delete("/:skillId", async (req, res, next) => {
       status: "success",
     });
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message || "伺服器錯誤",
-    });
+    logger.error(error);
+    next(error);
+    // res.status(500).json({
+    //   status: "error",
+    //   message: error.message || "伺服器錯誤",
+    // });
   }
 });
 
