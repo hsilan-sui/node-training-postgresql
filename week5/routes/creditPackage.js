@@ -33,10 +33,13 @@ router.get("/", async (req, res, next) => {
       data: creditPackageData,
     });
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message || "伺服器錯誤",
-    });
+    //使用logger
+    logger.error(error);
+    next(error);
+    // res.status(500).json({
+    //   status: "error",
+    //   message: error.message || "伺服器錯誤",
+    // });
   }
 });
 
@@ -57,6 +60,7 @@ router.post("/", async (req, res, next) => {
         status: "failed",
         message: "欄位未填寫正確",
       });
+      return; //忘記
     }
 
     //防呆2 資料庫有沒有重複的資料
@@ -92,6 +96,7 @@ router.post("/", async (req, res, next) => {
         status: "failed",
         message: "資料重複",
       });
+      return;
     }
 
     //都過前面的關卡 才把使用者送來的body資料在該資料表中做創建的動作
@@ -131,13 +136,15 @@ router.post("/", async (req, res, next) => {
     //結果
     res.status(200).json({
       status: "success",
-      data: newPackage,
+      data: result, //直接輸出result物件
     });
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message || "伺服器錯誤",
-    });
+    // res.status(500).json({
+    //   status: "error",
+    //   message: error.message || "伺服器錯誤",
+    // });
+    logger.error(error);
+    next(error);
   }
 });
 
@@ -171,16 +178,20 @@ router.delete("/:creditPackageId", async (req, res, next) => {
         status: "failed",
         message: "ID錯誤",
       });
+      return;
     }
 
     res.status(200).json({
       status: "success",
+      //data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message || "伺服器錯誤",
-    });
+    logger.error(error);
+    next(error);
+    // res.status(500).json({
+    //   status: "error",
+    //   message: error.message || "伺服器錯誤",
+    // });
   }
 });
 
