@@ -3,11 +3,11 @@ const { EntitySchema } = require("typeorm");
 module.exports = new EntitySchema({
   name: "Skill",
   tableName: "SKILL",
-  column: {
+  columns: {
     id: {
       primary: true,
       type: "uuid",
-      generated: "uuid",
+      generated: "uuid", //自動創建uuid
       nullable: false,
     },
     name: {
@@ -18,8 +18,8 @@ module.exports = new EntitySchema({
     },
     createdAt: {
       type: "timestamp",
-      createDate: true,
-      name: "created_at",
+      createDate: true, //自動創建日期
+      name: "created_at", //在資料庫顯示的名稱
       nullable: false,
     },
   },

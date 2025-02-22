@@ -1,6 +1,5 @@
 const { EntitySchema } = require("typeorm");
 
-//這裡的實體檔案專屬於 CreditPackage 這個資料表
 module.exports = new EntitySchema({
   name: "CreditPackage",
   tableName: "CREDIT_PACKAGE",
