@@ -5,7 +5,7 @@ const CreditPackage = require("../entities/CreditPackage");
 const Skill = require("../entities/Skill");
 const User = require("../entities/User");
 const Coach = require("../entities/Coach");
-const Coach = require("../entities/Course");
+const Course = require("../entities/Course");
 
 const dataSource = new DataSource({
   type: "postgres",

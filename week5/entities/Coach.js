@@ -21,8 +21,8 @@ module.exports = new EntitySchema({
     },
     description: {
       type: "text",
-      length: 2048,
-      nullable: true,
+      //nullable: true,
+      nullable: false,
     },
     profile_image_url: {
       //圖片
